@@ -26,9 +26,42 @@ namespace TaskTwo
 
     class Base : IOneExecutor, ITwoExecutor
     {
+        // Вариант первый.
+        void IOneExecutor.WriteExecutor()
+        {
+            Console.WriteLine("I one Executor");
+        }
+
+        void ITwoExecutor.WriteExecutor()
+        {
+            Console.WriteLine("I two Executor");
+        }
+
+        public IOneExecutor getOneExecutor()
+        {
+            return this;
+        }
+
+        public ITwoExecutor getTwoExecutor()
+        {
+            return this;
+        }
+
+        // вариант второй если не нужно менять функцию main.
+        //private readonly IOneExecutor one;
+        //private readonly ITwoExecutor two;
+
+        //public Base()
+        //{
+        //    this.one = this;
+        //    this.two = this;
+        //}
+
         public void WriteExecutor()
         {
             Console.WriteLine("I base Executor!");
+            //one.WriteExecutor();
+            //two.WriteExecutor();
         }
     }
 
@@ -40,7 +73,8 @@ namespace TaskTwo
         {
             var @base = new Base();
             @base.WriteExecutor();
-            
+            @base.getOneExecutor().WriteExecutor();
+            @base.getTwoExecutor().WriteExecutor();
         }
     }
 }

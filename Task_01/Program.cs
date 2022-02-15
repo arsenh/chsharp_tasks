@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace TaskOne
@@ -9,6 +10,25 @@ namespace TaskOne
     /// исправить потенциальную ошибку
     ///
     /// задачу необходимо реализовать, дописав код, чтобы data.GetDigits() стал работоспособным
+
+    public static class StringExt
+    {
+        public static byte[] GetDigits(this string str)
+        {
+            Console.WriteLine("GetDigist function\n");
+            List<byte> digists = new List<byte>();
+            foreach (char ch in str)
+            {
+                if (char.IsDigit(ch))
+                {
+                    Console.WriteLine(ch);
+                    digists.Add((byte)ch);
+                }
+            }
+            return digists.ToArray();
+        }
+    }
+
 
     class Program
     {

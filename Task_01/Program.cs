@@ -21,7 +21,6 @@ namespace TaskOne
             {
                 if (char.IsDigit(ch))
                 {
-                    Console.WriteLine(ch);
                     digists.Add((byte)ch);
                 }
             }

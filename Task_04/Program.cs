@@ -11,7 +11,19 @@ namespace Task_04
 
     class Program
     {
-        
+        private static IEnumerable<DateTime> AlarmClockTimer(DateTime wakeUp)
+        {
+            while(true)
+            {
+                var now = DateTime.Now;
+                if (now >= wakeUp)
+                {
+                    yield break;
+                }
+                yield return now;
+            }
+        }
+
         static void Main(string[] args)
         {
             var wakeUp = DateTime.Now.AddSeconds(10);

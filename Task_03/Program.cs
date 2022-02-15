@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TaskThree
 {
@@ -14,7 +15,7 @@ namespace TaskThree
 
         Update,
 
-        Delete
+        Delete,
         
     }
 
@@ -23,23 +24,23 @@ namespace TaskThree
         static void Main(string[] args)
         {
             var type = ActionType.Read;
-
-            switch (type)
+            var actions = new Dictionary<ActionType, Action<ActionType>>()
             {
-                case ActionType.Create:
-                    CreateMethod(type);
-                    break;
-                case ActionType.Read:
-                    ReadMethod(type);
-                    break;
-                case ActionType.Update:
-                    UpdateMethod(type);
-                    break;
-                case ActionType.Delete:
-                    DeleteMethod(type);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                { ActionType.Create, new Action<ActionType>(CreateMethod) },
+                { ActionType.Read, new Action<ActionType>(ReadMethod) },
+                { ActionType.Update, new Action<ActionType>(UpdateMethod) },
+                { ActionType.Delete, new Action<ActionType>(DeleteMethod) },
+            };
+
+            bool ret = false;
+            ret = actions.TryGetValue(type, out Action<ActionType> action);
+            if (ret)
+            {
+                action.Invoke(type);
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
             }
         }
 

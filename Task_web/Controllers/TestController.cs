@@ -72,11 +72,18 @@ namespace Task_web.Controllers
 
 
         // Update
-        //[HttpGet]
-        //[Route("api/[controller]/{id}")]
-        //IActionResult EditTestModelById(Guid id)
-        //{
-
-        //}
+        [HttpPatch]
+        [Route("api/[controller]/{id}")]
+        public IActionResult UpdateTestModelById(Guid id, TestModel model)
+        {
+            var model_from_db = _testModels.SingleOrDefault(x => x.Id == id);
+            if (null != model)
+            {
+                model.Id = model_from_db.Id;
+                model_from_db.Name = model.Name;
+                return Ok(model_from_db);
+            }
+            return NotFound($"TestModel with Id:{id} was not found.");
+        }
     }
 }

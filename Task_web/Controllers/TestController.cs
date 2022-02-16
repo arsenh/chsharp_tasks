@@ -17,12 +17,48 @@ namespace Task_web.Controllers
         {
             _testModels = testModels;
         }
-        
+
 
         /*
          *
          * необходимо релизовать CRUD для testModels
          *
          */
+        [HttpGet]
+        [Route("api/[controller]")]
+        public IActionResult GetTestModels()
+        {
+            return Ok(_testModels);
+        }
+
+        [HttpGet]
+        [Route("api/[controller]/{id}")]
+        public IActionResult GetTestModelById(Guid id)
+        {
+
+        }
+
+        [HttpPost]
+        [Route("api/[controller]")]
+        public IActionResult AddTestModel(TestModel model)
+        {
+            model.Id = Guid.NewGuid();
+            _testModels.Add(model);
+            return Ok(model);
+        }
+
+        [HttpGet]
+        [Route("api/[controller]/{id}")]
+        public IActionResult DeleteTestModelById(Guid id)
+        {
+
+        }
+
+        [HttpGet]
+        [Route("api/[controller]/{id}")]
+        IActionResult EditTestModelById(Guid id)
+        {
+
+        }
     }
 }

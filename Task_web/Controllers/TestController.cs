@@ -24,6 +24,8 @@ namespace Task_web.Controllers
          * необходимо релизовать CRUD для testModels
          *
          */
+
+        // Read all
         [HttpGet]
         [Route("api/[controller]")]
         public IActionResult GetTestModels()
@@ -31,13 +33,20 @@ namespace Task_web.Controllers
             return Ok(_testModels);
         }
 
+        // Read by ID
         [HttpGet]
         [Route("api/[controller]/{id}")]
         public IActionResult GetTestModelById(Guid id)
         {
-
+            var model = _testModels.SingleOrDefault(x => x.Id == id);
+            if (null != model)
+            {
+                return Ok(model);
+            }
+            return NotFound($"TestModel with Id:{id} was not found.");
         }
 
+        // Create
         [HttpPost]
         [Route("api/[controller]")]
         public IActionResult AddTestModel(TestModel model)
@@ -47,18 +56,21 @@ namespace Task_web.Controllers
             return Ok(model);
         }
 
-        [HttpGet]
-        [Route("api/[controller]/{id}")]
-        public IActionResult DeleteTestModelById(Guid id)
-        {
+        // Delete
+        //[HttpGet]
+        //[Route("api/[controller]/{id}")]
+        //public IActionResult DeleteTestModelById(Guid id)
+        //{
 
-        }
+        //}
 
-        [HttpGet]
-        [Route("api/[controller]/{id}")]
-        IActionResult EditTestModelById(Guid id)
-        {
 
-        }
+        // Update
+        //[HttpGet]
+        //[Route("api/[controller]/{id}")]
+        //IActionResult EditTestModelById(Guid id)
+        //{
+
+        //}
     }
 }

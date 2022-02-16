@@ -57,12 +57,18 @@ namespace Task_web.Controllers
         }
 
         // Delete
-        //[HttpGet]
-        //[Route("api/[controller]/{id}")]
-        //public IActionResult DeleteTestModelById(Guid id)
-        //{
-
-        //}
+        [HttpDelete]
+        [Route("api/[controller]/{id}")]
+        public IActionResult DeleteTestModelById(Guid id)
+        {
+            var model = _testModels.SingleOrDefault(x => x.Id == id);
+            if (null != model)
+            {
+                _testModels.Remove(model);
+                return Ok(model);
+            }
+            return NotFound($"TestModel with Id:{id} was not found.");
+        }
 
 
         // Update
